@@ -1,0 +1,124 @@
+[
+    {
+        "id": "a1d6f28724d3877c",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "873cd64453b2d503",
+        "type": "inject",
+        "z": "a1d6f28724d3877c",
+        "name": "Create Table",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "23550909ec1cd269"
+            ]
+        ]
+    },
+    {
+        "id": "a9bb933ca06ad9c6",
+        "type": "sqlite",
+        "z": "a1d6f28724d3877c",
+        "mydb": "",
+        "sqlquery": "msg.topic",
+        "sql": "CREATE TABLE IF NOT EXISTS leituras (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    device_id INTEGER NOT NULL,\n    ruido_dbfs REAL NOT NULL,\n    timestamp INTEGER NOT NULL\n);",
+        "name": "",
+        "x": 450,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "23550909ec1cd269",
+        "type": "function",
+        "z": "a1d6f28724d3877c",
+        "name": "function 4",
+        "func": "// Comandos DDL\nmsg.topic = \"CREATE TABLE leituras_sono (\" +\n            \"id INTEGER PRIMARY KEY AUTOINCREMENT, \" +\n            \"device_id TEXT NOT NULL, \" +\n            \"ruido_dbfs REAL NOT NULL, \" +\n            \"temperatura REAL NOT NULL,\" +\n            \"umidade REAL NOT NULL,\" +\n            \"timestamp INTEGER NOT NULL\" +\n            \")\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 160,
+        "wires": [
+            [
+                "a9bb933ca06ad9c6"
+            ]
+        ]
+    },
+    {
+        "id": "b32129e3a5ffa761",
+        "type": "inject",
+        "z": "a1d6f28724d3877c",
+        "name": "Delete rows",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 360,
+        "wires": [
+            [
+                "047591b114a7abe0"
+            ]
+        ]
+    },
+    {
+        "id": "047591b114a7abe0",
+        "type": "sqlite",
+        "z": "a1d6f28724d3877c",
+        "mydb": "",
+        "sqlquery": "fixed",
+        "sql": "DELETE FROM leituras_sono",
+        "name": "",
+        "x": 310,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f9a29923c5a21e8f",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-sqlite": "1.1.1"
+        }
+    }
+]

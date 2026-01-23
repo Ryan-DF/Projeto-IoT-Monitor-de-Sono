@@ -1,0 +1,425 @@
+[
+    {
+        "id": "ce71cc8003d80d26",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "eda33d7e0445f50d",
+        "type": "inject",
+        "z": "ce71cc8003d80d26",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 120,
+        "wires": [
+            [
+                "35547af71ad747c6"
+            ]
+        ]
+    },
+    {
+        "id": "621e381c84dfef53",
+        "type": "sqlite",
+        "z": "ce71cc8003d80d26",
+        "mydb": "",
+        "sqlquery": "prepared",
+        "sql": "SELECT\n    device_id,\n    ruido_dbfs,\n    timestamp\nFROM leituras_sono\nWHERE device_id = ?\nORDER BY timestamp ASC;",
+        "name": "",
+        "x": 90,
+        "y": 180,
+        "wires": [
+            [
+                "e93917257d64c5a9"
+            ]
+        ]
+    },
+    {
+        "id": "35547af71ad747c6",
+        "type": "function",
+        "z": "ce71cc8003d80d26",
+        "name": "function 1",
+        "func": "msg.params = [\"sleep_01\"];\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "621e381c84dfef53"
+            ]
+        ]
+    },
+    {
+        "id": "62c7a9920e405d19",
+        "type": "ui_chart",
+        "z": "ce71cc8003d80d26",
+        "name": "",
+        "group": "667f988010b068fd",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "ruido",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 350,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e93917257d64c5a9",
+        "type": "function",
+        "z": "ce71cc8003d80d26",
+        "name": "function 5",
+        "func": "msg.payload.forEach(row => {\n    node.send({\n        payload: row.ruido_dbfs,\n        timestamp: row.timestamp * 1000\n    });\n});\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 100,
+        "y": 260,
+        "wires": [
+            [
+                "62c7a9920e405d19"
+            ]
+        ]
+    },
+    {
+        "id": "e93d98b0179ec710",
+        "type": "inject",
+        "z": "ce71cc8003d80d26",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 360,
+        "wires": [
+            [
+                "dd0e58556b210975"
+            ]
+        ]
+    },
+    {
+        "id": "133fdfdff625eb63",
+        "type": "sqlite",
+        "z": "ce71cc8003d80d26",
+        "mydb": "",
+        "sqlquery": "prepared",
+        "sql": "SELECT\n    device_id,\n    temperatura,\n    timestamp\nFROM leituras_sono\nWHERE device_id = ?\nORDER BY timestamp ASC;",
+        "name": "",
+        "x": 90,
+        "y": 420,
+        "wires": [
+            [
+                "01311ffaaa4dfb9b"
+            ]
+        ]
+    },
+    {
+        "id": "dd0e58556b210975",
+        "type": "function",
+        "z": "ce71cc8003d80d26",
+        "name": "function 6",
+        "func": "msg.params = [\"sleep_01\"];\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 360,
+        "wires": [
+            [
+                "133fdfdff625eb63"
+            ]
+        ]
+    },
+    {
+        "id": "5669e6b70b23cee2",
+        "type": "ui_chart",
+        "z": "ce71cc8003d80d26",
+        "name": "",
+        "group": "667f988010b068fd",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "temperatura",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 370,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "01311ffaaa4dfb9b",
+        "type": "function",
+        "z": "ce71cc8003d80d26",
+        "name": "function 7",
+        "func": "msg.payload.forEach(row => {\n    node.send({\n        payload: row.temperatura,\n        timestamp: row.timestamp * 1000\n    });\n});\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 100,
+        "y": 500,
+        "wires": [
+            [
+                "5669e6b70b23cee2"
+            ]
+        ]
+    },
+    {
+        "id": "5a65c1dee08eda1d",
+        "type": "inject",
+        "z": "ce71cc8003d80d26",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 560,
+        "wires": [
+            [
+                "fadeeb4b9b1901e1"
+            ]
+        ]
+    },
+    {
+        "id": "b32cf73b5729b516",
+        "type": "sqlite",
+        "z": "ce71cc8003d80d26",
+        "mydb": "",
+        "sqlquery": "prepared",
+        "sql": "SELECT\n    device_id,\n    umidade,\n    timestamp\nFROM leituras_sono\nWHERE device_id = ?\nORDER BY timestamp ASC;",
+        "name": "",
+        "x": 110,
+        "y": 620,
+        "wires": [
+            [
+                "ebd1245e9fd1866d"
+            ]
+        ]
+    },
+    {
+        "id": "fadeeb4b9b1901e1",
+        "type": "function",
+        "z": "ce71cc8003d80d26",
+        "name": "function 8",
+        "func": "msg.params = [\"sleep_01\"];\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 560,
+        "wires": [
+            [
+                "b32cf73b5729b516"
+            ]
+        ]
+    },
+    {
+        "id": "309aa310355795bb",
+        "type": "ui_chart",
+        "z": "ce71cc8003d80d26",
+        "name": "",
+        "group": "667f988010b068fd",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "umidade",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "auto",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "10",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 380,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ebd1245e9fd1866d",
+        "type": "function",
+        "z": "ce71cc8003d80d26",
+        "name": "function 9",
+        "func": "msg.payload.forEach(row => {\n    node.send({\n        payload: row.umidade,\n        timestamp: row.timestamp * 1000\n    });\n});\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 120,
+        "y": 700,
+        "wires": [
+            [
+                "309aa310355795bb"
+            ]
+        ]
+    },
+    {
+        "id": "667f988010b068fd",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "e042f27ee12bf05d",
+        "order": 1,
+        "disp": false,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e042f27ee12bf05d",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "aedaafab10f2bafc",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-sqlite": "1.1.1",
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
