@@ -16,7 +16,7 @@ def main():
 
     try:
         server.listen(10)
-    except KeyboarInterrupt:
+    except KeyboardInterrupt:
         print("servidor finalizado")
         server.close()
 
