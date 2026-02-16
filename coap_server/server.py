@@ -9,7 +9,7 @@ class CoAPServer(CoAP):
         print(f"Servidor CoAP iniciado em coap://{host}:{port}/sono")
 
 def main():
-    host = "0.0.0.0"
+    host = "localhost"
     port = 5683
 
     server = CoAPServer(host, port)

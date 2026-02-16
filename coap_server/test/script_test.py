@@ -4,9 +4,9 @@ import random
 from coapthon.client.helperclient import HelperClient
 
 
-SERVER_HOST = "127.0.0.10"
+SERVER_HOST = "localhost"
 SERVER_PORT = 5683
-RESOURCE = "sono"
+RESOURCE = "sono/"
 
 DEVICE_ID = "sleep_01"
 INTERVALO_SEGUNDOS = 5  # tempo entre envios

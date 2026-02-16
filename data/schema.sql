@@ -7,5 +7,5 @@ CREATE TABLE IF NOT EXISTS leituras_sono (
     temperatura REAL,
     umidade REAL,
     ruido_dbfs REAL,
-    timestamp INTEGER NOT NULL
+    timestamp INTEGER DEFAULT (strftime('%s','now'))
 );
