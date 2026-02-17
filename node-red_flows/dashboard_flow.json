@@ -21,15 +21,15 @@
                 "vt": "str"
             }
         ],
-        "repeat": "60",
+        "repeat": "20",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 110,
-        "y": 120,
+        "x": 390,
+        "y": 100,
         "wires": [
             [
                 "35547af71ad747c6"
@@ -40,12 +40,12 @@
         "id": "621e381c84dfef53",
         "type": "sqlite",
         "z": "ce71cc8003d80d26",
-        "mydb": "",
+        "mydb": "ba2febef91171611",
         "sqlquery": "prepared",
         "sql": "SELECT\n    device_id,\n    ruido_dbfs,\n    timestamp\nFROM leituras_sono\nWHERE device_id = ?\nORDER BY timestamp ASC;",
         "name": "",
-        "x": 90,
-        "y": 180,
+        "x": 390,
+        "y": 160,
         "wires": [
             [
                 "e93917257d64c5a9"
@@ -64,8 +64,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 260,
-        "y": 120,
+        "x": 540,
+        "y": 100,
         "wires": [
             [
                 "621e381c84dfef53"
@@ -110,8 +110,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 350,
-        "y": 260,
+        "x": 630,
+        "y": 240,
         "wires": [
             []
         ]
@@ -128,8 +128,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 100,
-        "y": 260,
+        "x": 380,
+        "y": 240,
         "wires": [
             [
                 "62c7a9920e405d19"
@@ -150,34 +150,18 @@
                 "vt": "str"
             }
         ],
-        "repeat": "60",
+        "repeat": "20",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 110,
-        "y": 360,
+        "x": 390,
+        "y": 340,
         "wires": [
             [
                 "dd0e58556b210975"
-            ]
-        ]
-    },
-    {
-        "id": "133fdfdff625eb63",
-        "type": "sqlite",
-        "z": "ce71cc8003d80d26",
-        "mydb": "",
-        "sqlquery": "prepared",
-        "sql": "SELECT\n    device_id,\n    temperatura,\n    timestamp\nFROM leituras_sono\nWHERE device_id = ?\nORDER BY timestamp ASC;",
-        "name": "",
-        "x": 90,
-        "y": 420,
-        "wires": [
-            [
-                "01311ffaaa4dfb9b"
             ]
         ]
     },
@@ -193,11 +177,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 260,
-        "y": 360,
+        "x": 540,
+        "y": 340,
         "wires": [
             [
-                "133fdfdff625eb63"
+                "cfce5fef74539fe8"
             ]
         ]
     },
@@ -239,8 +223,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 370,
-        "y": 500,
+        "x": 650,
+        "y": 480,
         "wires": [
             []
         ]
@@ -257,8 +241,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 100,
-        "y": 500,
+        "x": 380,
+        "y": 480,
         "wires": [
             [
                 "5669e6b70b23cee2"
@@ -279,34 +263,18 @@
                 "vt": "str"
             }
         ],
-        "repeat": "60",
+        "repeat": "20",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 130,
-        "y": 560,
+        "x": 410,
+        "y": 540,
         "wires": [
             [
                 "fadeeb4b9b1901e1"
-            ]
-        ]
-    },
-    {
-        "id": "b32cf73b5729b516",
-        "type": "sqlite",
-        "z": "ce71cc8003d80d26",
-        "mydb": "",
-        "sqlquery": "prepared",
-        "sql": "SELECT\n    device_id,\n    umidade,\n    timestamp\nFROM leituras_sono\nWHERE device_id = ?\nORDER BY timestamp ASC;",
-        "name": "",
-        "x": 110,
-        "y": 620,
-        "wires": [
-            [
-                "ebd1245e9fd1866d"
             ]
         ]
     },
@@ -322,11 +290,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
-        "y": 560,
+        "x": 560,
+        "y": 540,
         "wires": [
             [
-                "b32cf73b5729b516"
+                "361c3d64494cc54f"
             ]
         ]
     },
@@ -368,8 +336,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 380,
-        "y": 700,
+        "x": 660,
+        "y": 680,
         "wires": [
             []
         ]
@@ -386,13 +354,51 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 120,
-        "y": 700,
+        "x": 400,
+        "y": 680,
         "wires": [
             [
                 "309aa310355795bb"
             ]
         ]
+    },
+    {
+        "id": "cfce5fef74539fe8",
+        "type": "sqlite",
+        "z": "ce71cc8003d80d26",
+        "mydb": "f61f37f6b13c0fde",
+        "sqlquery": "prepared",
+        "sql": "SELECT\n    device_id,\n    temperatura,\n    timestamp\nFROM leituras_sono\nWHERE device_id = ?\nORDER BY timestamp ASC;",
+        "name": "",
+        "x": 470,
+        "y": 400,
+        "wires": [
+            [
+                "01311ffaaa4dfb9b"
+            ]
+        ]
+    },
+    {
+        "id": "361c3d64494cc54f",
+        "type": "sqlite",
+        "z": "ce71cc8003d80d26",
+        "mydb": "32b808c842aada0b",
+        "sqlquery": "prepared",
+        "sql": "SELECT\n    device_id,\n    umidade,\n    timestamp\nFROM leituras_sono\nWHERE device_id = ?\nORDER BY timestamp ASC;",
+        "name": "",
+        "x": 430,
+        "y": 620,
+        "wires": [
+            [
+                "ebd1245e9fd1866d"
+            ]
+        ]
+    },
+    {
+        "id": "ba2febef91171611",
+        "type": "sqlitedb",
+        "db": "data\\sono.db",
+        "mode": "RWC"
     },
     {
         "id": "667f988010b068fd",
@@ -406,6 +412,18 @@
         "className": ""
     },
     {
+        "id": "f61f37f6b13c0fde",
+        "type": "sqlitedb",
+        "db": "data/sono.db",
+        "mode": "RWC"
+    },
+    {
+        "id": "32b808c842aada0b",
+        "type": "sqlitedb",
+        "db": "data/sono.db",
+        "mode": "RWC"
+    },
+    {
         "id": "e042f27ee12bf05d",
         "type": "ui_tab",
         "name": "Home",
@@ -414,7 +432,7 @@
         "hidden": false
     },
     {
-        "id": "aedaafab10f2bafc",
+        "id": "2ceebd310c9b563e",
         "type": "global-config",
         "env": [],
         "modules": {
