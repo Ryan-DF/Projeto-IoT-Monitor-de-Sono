@@ -14,3 +14,17 @@ Para testar o projeto serão necessários os seguintes componentes:
 A forma de fazer a ligação dos componentes pode ser facilmente encontrada pela internet, apenas certifique-se de que eles estão conectados as GPIOs corretas de acordo com o código dos microcontroladorese.
 O Arduino é utilizado pois, quando o ESP32 está com o WiFi ligado alguns problemas podem ser experenciados nas leituras das GPIOs. Caso possua um microcontrolodaor confiável todos o sensores podem ser utilizados
 junto a ele, eliminando assim a necessidade de utilizar a comunicação i2c entre microcontroladores.
+
+
+## Como executar
+
+1. Clone o repositório
+2. Crie o banco executando:
+
+python coap_server/db/init_db.py
+
+3. Inicie o servidor:
+
+python coap_server/server.py
+
+4. Inicie o Node-RED na raiz do projeto:
