@@ -1,4 +1,5 @@
 from coapthon.server.coap import CoAP
+from db.init_db import init_database
 from resources.sono_resource import SonoResource
 
 class CoAPServer(CoAP):
@@ -12,6 +13,7 @@ def main():
     host = "localhost"
     port = 5683
 
+    init_database()
     server = CoAPServer(host, port)
 
     try:
