@@ -1,30 +1,76 @@
-# Projeto-IoT-Monitor-de-Sono
-Um pequeno projeto feito para disciplina de IoT cursada na UNIFESP (segundo semestre de 2025)
+# IoT Sleep Monitoring System
 
-Para testar o projeto serão necessários os seguintes componentes:
-. 1 - Arduino
-. 1 - ESP32
-. 1 - Microfone INMP441 (com conexão configurada para funcionar como lado esquerdo)
-. 1 - DHT11
-. 1 - Protoboard
-. 1 - Fios para conexão dos componentes
-. Node-RED com Sqlite instalado em um computador
-. Python
+Sistema de monitoramento de sono baseado em arquitetura IoT, utilizando comunicação via CoAP, persistência em SQLite e visualização em Node-RED.
+O projeto foi desenvolvido inicialmente para a disciplina de Internet das Coisas (UNIFESP – 2º semestre de 2025) e posteriormente refatorado com foco em:
+- Separação de responsabilidades
+- Validação estruturada de dados
+- Tratamento adequado de exceções
+- Persistência desacoplada da camada de visualização
+- Reprodutibilidade do ambiente
 
-A forma de fazer a ligação dos componentes pode ser facilmente encontrada pela internet, apenas certifique-se de que eles estão conectados as GPIOs corretas de acordo com o código dos microcontroladorese.
-O Arduino é utilizado pois, quando o ESP32 está com o WiFi ligado alguns problemas podem ser experenciados nas leituras das GPIOs. Caso possua um microcontrolodaor confiável todos o sensores podem ser utilizados
-junto a ele, eliminando assim a necessidade de utilizar a comunicação i2c entre microcontroladores.
+# Arquitetura do Sistema
 
+Fluxo de dados:
 
-## Como executar
+ESP32 (sensores)
+        ↓
+CoAP Server (Python)
+        ↓
+Validação de Payload
+        ↓
+SQLite (persistência)
+        ↓
+Node-RED (visualização)
 
-1. Clone o repositório
-2. Crie o banco executando:
+O servidor é responsável por:
+- Receber dados via CoAP
+- Validar estrutura e tipos do payload
+- Persistir dados no banco SQLite
+- Gerenciar erros de forma adequada
+- O Node-RED é utilizado exclusivamente para visualização dos dados armazenados.
 
-python coap_server/db/init_db.py
+# Componentes de Hardware (opcional)
 
-3. Inicie o servidor:
+Para execução com hardware real:
+- ESP32
+- Arduino (usado para evitar interferências nas GPIOs com WiFi ativo)
+- Microfone INMP441
+- Sensor DHT11
+- Protoboard
+- Cabos de conexão
 
+Observação: É possível utilizar apenas um microcontrolador confiável, eliminando a comunicação I2C entre dispositivos.
+
+# Execução do Projeto (modo simulador)
+
+O projeto pode ser executado sem hardware físico utilizando o script simulador.
+
+1️ - Clone o repositório
+git clone <url-do-repositorio>
+cd Projeto-IoT-Monitor-de-Sono
+2️ - Crie e ative um ambiente virtual
+python -m venv .venv
+
+Windows:
+
+.venv\Scripts\activate
+
+3️ - Instale as dependências
+pip install -r requirements.txt
+
+4️ - Inicie o servidor CoAP
 python coap_server/server.py
 
-4. Inicie o Node-RED na raiz do projeto:
+O banco de dados será inicializado automaticamente na primeira execução.
+
+5️ - (Opcional) Inicie o simulador
+python simulator/simulator.py
+
+# Visualização com Node-RED
+
+Inicie o Node-RED
+
+Configure o nó SQLite apontando para:
+data/sono.db
+
+Utilize os nós de dashboard para visualizar as leituras
