@@ -1,4 +1,4 @@
-# IoT Sleep Monitoring System
+# Sistema de Monitoramente do Sono IoT
 
 Sistema de monitoramento de sono baseado em arquitetura IoT, utilizando comunicação via CoAP, persistência em SQLite e visualização em Node-RED.
 O projeto foi desenvolvido inicialmente para a disciplina de Internet das Coisas (UNIFESP – 2º semestre de 2025) e posteriormente refatorado com foco em:
